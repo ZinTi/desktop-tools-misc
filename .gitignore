@@ -1,0 +1,17 @@
+# This file is used to exclude files and directories from the repository.
+
+.vscode/
+.idea/
+build/
+
+
+*.obj
+*.o
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+
+
+
