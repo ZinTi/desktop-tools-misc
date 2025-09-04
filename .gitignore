@@ -3,15 +3,26 @@
 .vscode/
 .idea/
 build/
+target/
 
 
 *.obj
 *.o
 *.lib
+*.a
+*.dll.a
 *.dll
 *.so
 *.dylib
 *.exe
+*.7z
+*.zip
+*.tar.gz
 
+# grpc generated files
+*.pb.cc
+*.pb.h
+*.grpc.pb.cc
+*.grpc.pb.h
 
 
