@@ -10,6 +10,17 @@ import (
 	"time"
 )
 
+func init() {
+	// 设置Windows控制台输出为UTF-8编码
+	setConsoleOutputCP(65001) // 65001 = UTF-8
+}
+
+func setConsoleOutputCP(codepage uint) {
+	kernel32 := syscall.NewLazyDLL("kernel32.dll")
+	proc := kernel32.NewProc("SetConsoleOutputCP")
+	_, _, _ = proc.Call(uintptr(codepage))
+}
+
 // 获取局域网IP地址
 func getLocalIP() (string, error) {
 	// 获取所有网络接口
@@ -68,7 +79,7 @@ func about(){
 	fmt.Println("+---------------------------------------+")
 	fmt.Printf("| %-16s   %-18s |\n", "Version:", "1.0")
 	fmt.Printf("| %-16s   %-18s |\n", "Author:", "ZENG Lai")
-	fmt.Printf("| %-16s   %-18s |\n", "Last Modified:", "2025-02-28")
+	fmt.Printf("| %-16s   %-18s |\n", "Last modified:", "2025-02-28")
 	fmt.Println("+---------------------------------------+")
 }
 
@@ -98,7 +109,12 @@ func main() {
 
 	// 绘制表格
 	drawTable("HTTP", ip, fmt.Sprintf("%d", port), homepage)
-
+    fmt.Println("------------------------------")
+	fmt.Println("Attention! ")
+	fmt.Println("If there are multiple network adapters on this machine (including virtual switches from virtual machines), the currently displayed server IP address may be incorrect due to the presence of multiple IP addresses. Please use shell commands to obtain the actual IP address.")
+	fmt.Println("请注意！")
+	fmt.Println("如果本机存在多个网络适配器（包括vm虚拟交换机），由于存在多个IP地址，当前显示的服务器IP地址可能不正确。请使用shell命令获取实际IP地址。");
+	fmt.Println("------------------------------")
 	fmt.Println("Press Ctrl+C to stop the server")
 
 	go func() {
